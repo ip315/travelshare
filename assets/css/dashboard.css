@@ -1274,3 +1274,118 @@ body {
   }
 }
 
+/* Profile Modern Styles */
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 36px 28px 32px 28px;
+  margin-top: 40px;
+}
+.profile-header-modern {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.profile-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #e4e6eb;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  background: #f0f2f5;
+}
+.profile-info-modern {
+  text-align: center;
+}
+.profile-username-modern {
+  font-size: 2em;
+  font-weight: 700;
+  color: #1a2233;
+  margin-bottom: 4px;
+}
+.profile-email-modern {
+  color: #888;
+  font-size: 1em;
+  margin-bottom: 4px;
+}
+.profile-bio-modern {
+  color: #444;
+  font-size: 1.08em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+.profile-stats-modern {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin: 24px 0 18px 0;
+}
+.stat-item-modern {
+  background: #f7f7fa;
+  border-radius: 12px;
+  padding: 18px 24px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  min-width: 90px;
+}
+.stat-item-modern strong {
+  display: block;
+  font-size: 1.3em;
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.stat-item-modern span {
+  color: #65676b;
+  font-size: 1em;
+}
+.profile-nav-modern {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+.profile-nav-modern .tab {
+  background: #f0f2f5;
+  border-radius: 8px;
+  padding: 8px 18px;
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.profile-nav-modern .tab.active, .profile-nav-modern .tab:hover {
+  background: #2563eb;
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .profile-container {
+    padding: 12px 2vw 18px 2vw;
+  }
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  .profile-stats-modern {
+    gap: 12px;
+  }
+  .stat-item-modern {
+    padding: 10px 8px;
+    min-width: 60px;
+  }
+  .profile-username-modern {
+    font-size: 1.2em;
+  }
+}
+

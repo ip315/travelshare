@@ -40,7 +40,7 @@
         ?>
         <div class="post-card">
           <div class="post-header">
-            <img src="<?= $post['avatar'] ? (BASE_URL . 'assets/uploads/' . $post['avatar']) : (IMAGES_URL . 'default_avatar.png') ?>" class="avatar">
+            <img src="<?= $post['avatar'] ? (BASE_URL . 'assets/uploads/' . $post['avatar']) : (IMAGES_URL . 'default.jpg') ?>" class="avatar" onerror="this.onerror=null;this.src='<?= IMAGES_URL ?>default.jpg';">
             <span><?= htmlspecialchars($post['username']) ?></span>
             <span class="post-time"><?= $post['created_at'] ?></span>
           </div>

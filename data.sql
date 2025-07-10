@@ -101,3 +101,5 @@ INSERT INTO comments (user_id, post_id, content) VALUES
 (1, 2, 'Bài viết rất hay!'),
 (2, 1, 'Cảm ơn bạn đã chia sẻ!'),
 (3, 1, 'Tôi cũng muốn đi Hà Nội!');
+
+ALTER TABLE users ADD COLUMN bio TEXT NULL AFTER avatar;

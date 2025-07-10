@@ -52,6 +52,7 @@ class AuthController {
             if ($user) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['avatar'] = $user['avatar'];
                 echo json_encode([
                     'success' => true, 
                     'message' => 'Đăng nhập thành công!', 

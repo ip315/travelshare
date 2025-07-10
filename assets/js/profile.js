@@ -10,7 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cập nhật thông tin người dùng trên UI
     function updateProfileUI(user) {
         if (!user) return;
-        profileAvatar.src = user.avatar ? (window.BASE_URL + 'assets/uploads/' + user.avatar) : (window.IMAGES_URL + 'default_avatar.png');
+        profileAvatar.src = user.avatar
+          ? (window.BASE_URL + 'assets/uploads/' + user.avatar)
+          : (window.IMAGES_URL + 'default.jpg');
+        profileAvatar.onerror = function() {
+          this.onerror = null;
+          this.src = window.IMAGES_URL + 'default.jpg';
+        };
         profileUsername.textContent = user.username;
         if(document.getElementById('profile-email')) {
           document.getElementById('profile-email').textContent = user.email || '';

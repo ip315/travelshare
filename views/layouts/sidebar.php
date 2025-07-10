@@ -4,11 +4,11 @@
     if (session_status() === PHP_SESSION_NONE) session_start();
     $avatar = isset($_SESSION['avatar']) && $_SESSION['avatar']
         ? (BASE_URL . 'assets/uploads/' . $_SESSION['avatar'])
-        : (IMAGES_URL . '@defause.jpg');
+        : (IMAGES_URL . 'default.jpg');
     $username = $_SESSION['username'] ?? 'Khách';
     ?>
     <div style="display:flex;align-items:center;flex-direction:column;margin-top:10px;">
-      <img src="<?php echo $avatar; ?>" alt="Avatar" class="sidebar-user-avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:4px;" onerror="this.onerror=null;this.src='<?php echo IMAGES_URL; ?>@defause.jpg';">
+      <img src="<?php echo $avatar; ?>" alt="Avatar" class="sidebar-user-avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:4px;" onerror="this.onerror=null;this.src='<?php echo IMAGES_URL; ?>default.jpg';">
       <span class="sidebar-user-name" style="font-weight:bold;font-size:15px;line-height:1;"><?php echo htmlspecialchars($username); ?></span>
     </div>
   </div>
@@ -29,11 +29,8 @@
       <img src="<?php echo IMAGES_URL; ?>create_post.png" alt="Create" class="nav-icon" id="create-icon" />
       <span>Tạo bài đăng</span>
     </a>
-    <a href="<?php echo BASE_URL; ?>public/profile.php" class="nav-item" data-page="profile">
-      <?php
-      $avatarIcon = isset($_SESSION['avatar']) && $_SESSION['avatar'] ? (BASE_URL . 'assets/uploads/' . $_SESSION['avatar']) : (IMAGES_URL . 'profile.svg');
-      ?>
-      <img src="<?php echo $avatarIcon; ?>" alt="Profile" class="nav-icon profile-img" id="profile-icon" style="object-fit:cover;border-radius:50%;width:32px;height:32px;" />
+    <a href="<?php echo BASE_URL; ?>profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
+      <img src="<?php echo IMAGES_URL; ?>icons8-account-50.png" alt="Profile Icon" class="nav-icon" style="width:24px;height:24px;object-fit:contain;">
       <span>Trang cá nhân</span>
     </a>
     <a href="#" class="nav-item" data-page="logout" onclick="handleLogout(event)">

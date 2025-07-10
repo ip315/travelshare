@@ -39,7 +39,7 @@
             $stmt->close();
         }
         ?>
-        <img src="<?php echo $avatar; ?>" alt="User Avatar" class="create-post-avatar" id="post-user-avatar" />
+        <img src="<?php echo $avatar; ?>" alt="User Avatar" class="create-post-avatar" id="post-user-avatar" onerror="this.onerror=null;this.src='<?php echo IMAGES_URL; ?>default.jpg';" />
         <div class="create-post-user-details">
           <h3 id="post-username"><?php echo htmlspecialchars($username); ?></h3>
           <div class="create-post-privacy">

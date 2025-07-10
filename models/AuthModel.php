@@ -6,21 +6,22 @@ class AuthModel {
         $this->mysqli = $mysqli;
     }
     public function authenticateUser($email, $password) {
-        $stmt = $this->mysqli->prepare("SELECT id, username, password FROM users WHERE email = ?");
+        $stmt = $this->mysqli->prepare("SELECT id, username, password, avatar FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $id=null;
-        $username=null; 
+        $username=null;
         $storedPassword=null;
+        $avatar=null;
         $stmt->store_result();
-        $stmt->bind_result($id, $username, $storedPassword);
+        $stmt->bind_result($id, $username, $storedPassword, $avatar);
         
         if ($stmt->fetch()) {
             $stmt->close();
             
             // So sánh mật khẩu đơn giản (KHÔNG mã hóa)
             if ($password === $storedPassword) {
-                return ['id' => $id, 'username' => $username];
+                return ['id' => $id, 'username' => $username, 'avatar' => $avatar];
             } else {
                 return false;
             }
