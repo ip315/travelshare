@@ -2,11 +2,13 @@
   <div class="sidebar-header">
     <?php
     if (session_status() === PHP_SESSION_NONE) session_start();
-    $avatar = isset($_SESSION['avatar']) && $_SESSION['avatar'] ? (BASE_URL . 'assets/uploads/' . $_SESSION['avatar']) : (IMAGES_URL . 'profile.svg');
+    $avatar = isset($_SESSION['avatar']) && $_SESSION['avatar']
+        ? (BASE_URL . 'assets/uploads/' . $_SESSION['avatar'])
+        : (IMAGES_URL . '@defause.jpg');
     $username = $_SESSION['username'] ?? 'Khách';
     ?>
     <div style="display:flex;align-items:center;flex-direction:column;margin-top:10px;">
-      <img src="<?php echo $avatar; ?>" alt="Avatar" class="sidebar-user-avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:4px;">
+      <img src="<?php echo $avatar; ?>" alt="Avatar" class="sidebar-user-avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:4px;" onerror="this.onerror=null;this.src='<?php echo IMAGES_URL; ?>@defause.jpg';">
       <span class="sidebar-user-name" style="font-weight:bold;font-size:15px;line-height:1;"><?php echo htmlspecialchars($username); ?></span>
     </div>
   </div>

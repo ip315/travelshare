@@ -117,68 +117,150 @@ body {
 .like-btn:hover, .comment-btn:hover {
   background: #f0f2f5;
 }
+.like-btn:disabled, .comment-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .comments-section {
-  margin-top: 10px;
+  margin-top: 16px;
   background: #f7f7fa;
-  border-radius: 10px;
-  padding: 10px 12px 6px 12px;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e4e6eb;
 }
 .comments-list {
-  max-height: 180px;
+  max-height: 300px;
   overflow-y: auto;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+}
+.comments-list::-webkit-scrollbar {
+  width: 6px;
+}
+.comments-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+.comments-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+.no-comments {
+  text-align: center;
+  color: #65676b;
+  font-style: italic;
+  padding: 20px;
+  margin: 0;
 }
 .comment-item {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.15s;
+  position: relative;
+}
+.comment-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.comment-item:last-child {
+  margin-bottom: 0;
 }
 .comment-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   background: #eee;
+  flex-shrink: 0;
 }
 .comment-content {
-  background: #fff;
-  border-radius: 8px;
-  padding: 7px 12px;
-  font-size: 1em;
-  color: #222;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  flex: 1;
+  min-width: 0;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.comment-username {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #1a2233;
+}
+.comment-time {
+  font-size: 0.85em;
+  color: #65676b;
+}
+.comment-text {
+  font-size: 0.95em;
+  color: #444;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+.delete-comment-btn {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 4px;
+}
+.delete-comment-btn:hover {
+  background: #ff3742;
 }
 .comment-form {
   display: flex;
   gap: 8px;
   align-items: center;
+  background: #fff;
+  border-radius: 20px;
+  padding: 8px 12px;
+  border: 1px solid #e4e6eb;
 }
 .comment-input {
   flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  padding: 7px 14px;
-  font-size: 1em;
+  border: none;
   outline: none;
-  background: #fff;
+  font-size: 0.95em;
+  color: #444;
+  background: transparent;
+  padding: 4px 0;
+}
+.comment-input::placeholder {
+  color: #65676b;
 }
 .send-comment-btn {
   background: #1877f2;
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1em;
+  font-size: 0.9em;
   cursor: pointer;
   transition: background 0.15s;
+  flex-shrink: 0;
 }
 .send-comment-btn:hover {
   background: #145db2;
+}
+.send-comment-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 @media (max-width: 900px) {
   .post-item {
@@ -192,23 +274,31 @@ body {
     width: 32px;
     height: 32px;
   }
+  .comments-section {
+    padding: 12px;
+  }
+  .comment-item {
+    padding: 8px;
+  }
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
 }
 /* Nhiều ảnh dạng grid */
 .post-images-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 8px;
-  margin-top: 14px;
+  margin: 18px 0 0 0;
 }
 .post-image-multi {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
-  background: #f0f2f5;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-  transition: transform 0.18s;
+  border-radius: 12px;
+  transition: transform 0.22s;
 }
 .post-image-multi:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 } 

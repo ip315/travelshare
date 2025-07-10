@@ -24,7 +24,9 @@ CREATE TABLE posts (
     image VARCHAR(255),
     feeling VARCHAR(100) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_user_id (user_id),
+    INDEX idx_created_at (created_at)
 );
 
 -- Bảng lượt thích
@@ -35,7 +37,9 @@ CREATE TABLE likes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
-    UNIQUE (user_id, post_id)
+    UNIQUE (user_id, post_id),
+    INDEX idx_post_id (post_id),
+    INDEX idx_user_id (user_id)
 );
 
 -- Bảng bình luận
@@ -46,7 +50,9 @@ CREATE TABLE comments (
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    INDEX idx_post_id (post_id),
+    INDEX idx_user_id (user_id)
 );
 
 -- Bảng thông báo
@@ -56,7 +62,9 @@ CREATE TABLE notifications (
     message TEXT NOT NULL,
     is_read BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_user_id (user_id),
+    INDEX idx_is_read (is_read)
 );
 
 -- Bảng lịch sử chỉnh sửa bài đăng
@@ -68,5 +76,28 @@ CREATE TABLE post_history (
     old_content TEXT,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
-    FOREIGN KEY (editor_id) REFERENCES users(id) ON DELETE SET NULL
+    FOREIGN KEY (editor_id) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_post_id (post_id)
 );
+
+-- Thêm dữ liệu mẫu để test
+INSERT INTO users (username, email, password) VALUES 
+('admin', 'admin@example.com', 'admin123'),
+('user1', 'user1@example.com', 'user123'),
+('user2', 'user2@example.com', 'user123');
+
+-- Thêm bài đăng mẫu
+INSERT INTO posts (user_id, title, location, content, feeling) VALUES 
+(1, 'Du lịch Hà Nội', 'Hà Nội, Việt Nam', 'Chuyến đi tuyệt vời đến thủ đô Hà Nội!', 'hạnh phúc'),
+(2, 'Khám phá Sài Gòn', 'TP.HCM, Việt Nam', 'Sài Gòn thật sôi động và thú vị!', 'phấn khích'),
+(3, 'Nghỉ dưỡng Đà Nẵng', 'Đà Nẵng, Việt Nam', 'Biển Đà Nẵng thật đẹp!', 'thư giãn');
+
+-- Thêm lượt thích mẫu
+INSERT INTO likes (user_id, post_id) VALUES 
+(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2);
+
+-- Thêm bình luận mẫu
+INSERT INTO comments (user_id, post_id, content) VALUES 
+(1, 2, 'Bài viết rất hay!'),
+(2, 1, 'Cảm ơn bạn đã chia sẻ!'),
+(3, 1, 'Tôi cũng muốn đi Hà Nội!');
