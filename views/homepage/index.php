@@ -204,29 +204,42 @@
             <a href="#">Xem tất cả</a>
         </div>
         <div class="boxs">
-            <div class="box">
-                <a href="#"><img src="<?php echo IMAGES_URL; ?>post-1.jpg" alt="Cẩm nang phượt"></a>
-                <a href="#">Cẩm nang phượt Tây Bắc cho người lần đầu</a>
+        <?php
+        require_once dirname(__DIR__, 2) . '/config/db.php';
+        // Lấy danh sách bài đăng
+        $result = $mysqli->query("SELECT p.*, u.username, u.avatar FROM posts p JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC");
+        while ($post = $result->fetch_assoc()):
+        ?>
+            <div class="box" id="post-<?= $post['id'] ?>">
+                <?php if ($post['image']): ?>
+                    <a href="#"><img src="<?= $post['image'] ?>" alt="<?= htmlspecialchars($post['title']) ?>" style="max-width:100%;height:auto;"></a>
+                <?php endif; ?>
+                <a href="#"><?= htmlspecialchars($post['title']) ?></a>
                 <p>
-                    bởi <a href="#">Minh Đức</a> vào <a href="#">19/12/2023</a>
+                    bởi <a href="#"><?= htmlspecialchars($post['username']) ?></a> vào <a href="#"><?= $post['created_at'] ?></a>
                 </p>
+                <div><?= htmlspecialchars($post['location']) ?></div>
+                <div><?= nl2br(htmlspecialchars($post['content'])) ?></div>
             </div>
-            <div class="box">
-                <a href="#"><img src="<?php echo IMAGES_URL; ?>post-2.jpg" alt="Ẩm thực đường phố"></a>
-                <a href="#">Khám phá ẩm thực đường phố Hà Nội</a>
-                <p>bởi <a href="#">Lan Anh</a> vào <a href="#">15/12/2023</a></p>
-            </div>
-            <div class="box">
-                <a href="#"><img src="<?php echo IMAGES_URL; ?>post-3.jpg" alt="Du lịch bụi"></a>
-                <a href="#">Kinh nghiệm du lịch bụi với ngân sách hạn hẹp</a>
-                <p>
-                    bởi <a href="#">Tuấn Nguyễn</a> vào <a href="#">12/12/2023</a>
-                </p>
-            </div>
+        <?php endwhile; ?>
         </div>
     </div>
 </div>
 <!-- End Blog-Section -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const postId = params.get('id');
+  if (postId) {
+    const postElem = document.getElementById('post-' + postId);
+    if (postElem) {
+      postElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      postElem.style.background = '#ffffcc';
+      setTimeout(() => postElem.style.background = '', 2000);
+    }
+  }
+});
+</script>
 
 <!-- Start Subscribe-Section -->
 <div class="subscribe-section" id="subscribe-section">
