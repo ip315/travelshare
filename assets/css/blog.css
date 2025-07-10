@@ -1,0 +1,214 @@
+body {
+  background: #f0f2f5;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.posts-grid {
+  margin-top: 40px;
+}
+.post-item {
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 1.5px 4px rgba(0,0,0,0.07);
+  padding: 32px 32px 28px 32px;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: box-shadow 0.22s, transform 0.22s;
+  position: relative;
+  min-height: 220px;
+  width: 100%;
+  max-width: 800px;
+}
+.post-item:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+  transform: translateY(-4px) scale(1.015);
+}
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e4e6eb;
+  margin-right: 18px;
+  background: #f0f2f5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.post-user-info {
+  flex: 1;
+}
+.post-username {
+  font-weight: 700;
+  font-size: 1.22em;
+  color: #1a2233;
+  display: block;
+  margin-bottom: 2px;
+}
+.post-meta {
+  font-size: 1.05em;
+  color: #65676b;
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.post-meta i {
+  margin-right: 3px;
+  color: #45bd62;
+}
+.post-location i { color: #f5533d; }
+.post-feeling i { color: #f7b928; }
+.post-time i { color: #888; }
+.post-item h3 {
+  margin: 16px 0 10px 0;
+  font-size: 1.25em;
+  color: #222;
+  letter-spacing: 0.01em;
+}
+.post-item p {
+  margin: 0 0 14px 0;
+  color: #444;
+  font-size: 1.09em;
+  line-height: 1.7;
+}
+.post-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin: 18px 0 0 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  transition: transform 0.22s;
+  display: block;
+  background: #f0f2f5;
+}
+.post-image:hover {
+  transform: scale(1.03);
+}
+.post-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+.like-btn, .comment-btn {
+  background: none;
+  border: none;
+  color: #1877f2;
+  font-weight: 600;
+  font-size: 1.05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.like-btn[data-liked="1"] {
+  color: #e03a3c;
+}
+.like-btn:hover, .comment-btn:hover {
+  background: #f0f2f5;
+}
+.comments-section {
+  margin-top: 10px;
+  background: #f7f7fa;
+  border-radius: 10px;
+  padding: 10px 12px 6px 12px;
+}
+.comments-list {
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eee;
+}
+.comment-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1em;
+  color: #222;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.comment-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.comment-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 7px 14px;
+  font-size: 1em;
+  outline: none;
+  background: #fff;
+}
+.send-comment-btn {
+  background: #1877f2;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.send-comment-btn:hover {
+  background: #145db2;
+}
+@media (max-width: 900px) {
+  .post-item {
+    padding: 16px 4px 12px 4px;
+    max-width: 99vw;
+  }
+  .post-image {
+    max-height: 220px;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
+/* Nhiều ảnh dạng grid */
+.post-images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+.post-image-multi {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f0f2f5;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  transition: transform 0.18s;
+}
+.post-image-multi:hover {
+  transform: scale(1.03);
+} 

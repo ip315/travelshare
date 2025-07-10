@@ -147,6 +147,8 @@
       onchange="handleFileSelect(event)"
       multiple
     />
+    <input type="hidden" id="latitudeInput" name="latitude" />
+    <input type="hidden" id="longitudeInput" name="longitude" />
     <span id="imageFilename" style="margin-left:10px;color:#555;font-style:italic;"></span>
   </div>
 </main>
@@ -192,6 +194,72 @@ document.addEventListener('DOMContentLoaded', function() {
   const input = document.getElementById('locationText');
   const suggestions = document.getElementById('locationSuggestions');
 
+  const locationCoordinates = {
+    "An Giang": { lat: 10.521583, lng: 105.125895 },
+    "Bà Rịa - Vũng Tàu": { lat: 10.541739, lng: 107.242997 },
+    "Bắc Giang": { lat: 21.281992, lng: 106.197476 },
+    "Bắc Kạn": { lat: 22.147042, lng: 105.834812 },
+    "Bạc Liêu": { lat: 9.294002, lng: 105.727758 },
+    "Bắc Ninh": { lat: 21.186082, lng: 106.07643 },
+    "Bến Tre": { lat: 10.243355, lng: 106.375551 },
+    "Bình Định": { lat: 14.166532, lng: 108.902683 },
+    "Bình Dương": { lat: 11.325402, lng: 106.477017 },
+    "Bình Phước": { lat: 11.751189, lng: 106.723463 },
+    "Bình Thuận": { lat: 11.090370, lng: 108.072078 },
+    "Cà Mau": { lat: 9.179346, lng: 105.150682 },
+    "Cần Thơ": { lat: 10.045162, lng: 105.746857 },
+    "Cao Bằng": { lat: 22.665661, lng: 106.257954 },
+    "Đà Nẵng": { lat: 16.054407, lng: 108.202167 },
+    "Đắk Lắk": { lat: 12.710011, lng: 108.237751 },
+    "Đắk Nông": { lat: 12.264647, lng: 107.609806 },
+    "Điện Biên": { lat: 21.386024, lng: 103.023012 },
+    "Đồng Nai": { lat: 10.945272, lng: 106.824665 },
+    "Đồng Tháp": { lat: 10.493798, lng: 105.688178 },
+    "Gia Lai": { lat: 13.807894, lng: 108.109375 },
+    "Hà Giang": { lat: 22.823334, lng: 104.983570 },
+    "Hà Nam": { lat: 20.583519, lng: 105.922990 },
+    "Hà Nội": { lat: 21.028511, lng: 105.804817 },
+    "Hà Tĩnh": { lat: 18.355869, lng: 105.887749 },
+    "Hải Dương": { lat: 20.937341, lng: 106.314554 },
+    "Hải Phòng": { lat: 20.844911, lng: 106.688084 },
+    "Hậu Giang": { lat: 9.757898, lng: 105.641252 },
+    "Hòa Bình": { lat: 20.853889, lng: 105.337593 },
+    "Hưng Yên": { lat: 20.852571, lng: 106.016997 },
+    "Khánh Hòa": { lat: 12.258509, lng: 109.052607 },
+    "Kiên Giang": { lat: 9.824958, lng: 105.125895 },
+    "Kon Tum": { lat: 14.349084, lng: 108.000000 },
+    "Lai Châu": { lat: 22.386223, lng: 103.470263 },
+    "Lâm Đồng": { lat: 11.575279, lng: 108.142866 },
+    "Lạng Sơn": { lat: 21.853708, lng: 106.761519 },
+    "Lào Cai": { lat: 22.480943, lng: 103.975495 },
+    "Long An": { lat: 10.543438, lng: 106.411142 },
+    "Nam Định": { lat: 20.438822, lng: 106.162105 },
+    "Nghệ An": { lat: 19.234249, lng: 104.920036 },
+    "Ninh Bình": { lat: 20.250614, lng: 105.974453 },
+    "Ninh Thuận": { lat: 11.673876, lng: 108.986419 },
+    "Phú Thọ": { lat: 21.345009, lng: 105.287228 },
+    "Phú Yên": { lat: 13.088186, lng: 109.092876 },
+    "Quảng Bình": { lat: 17.468909, lng: 106.622307 },
+    "Quảng Nam": { lat: 15.539353, lng: 108.019102 },
+    "Quảng Ngãi": { lat: 15.120152, lng: 108.804414 },
+    "Quảng Ninh": { lat: 21.006382, lng: 107.292514 },
+    "Quảng Trị": { lat: 16.740307, lng: 107.185467 },
+    "Sóc Trăng": { lat: 9.602521, lng: 105.973904 },
+    "Sơn La": { lat: 21.325684, lng: 103.918175 },
+    "Tây Ninh": { lat: 11.365182, lng: 106.098876 },
+    "Thái Bình": { lat: 20.446347, lng: 106.336065 },
+    "Thái Nguyên": { lat: 21.567155, lng: 105.825203 },
+    "Thanh Hóa": { lat: 19.806692, lng: 105.785181 },
+    "Thừa Thiên Huế": { lat: 16.463713, lng: 107.590866 },
+    "Tiền Giang": { lat: 10.449332, lng: 106.342050 },
+    "TP. Hồ Chí Minh": { lat: 10.776889, lng: 106.700806 },
+    "Trà Vinh": { lat: 9.934575, lng: 106.345642 },
+    "Tuyên Quang": { lat: 21.823105, lng: 105.214973 },
+    "Vĩnh Long": { lat: 10.253975, lng: 105.972419 },
+    "Vĩnh Phúc": { lat: 21.353118, lng: 105.547437 },
+    "Yên Bái": { lat: 21.705100, lng: 104.870432 }
+  };
+
   input.addEventListener('input', function() {
     const value = input.value.trim().toLowerCase();
     if (!value) {
@@ -213,6 +281,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.classList.contains('location-suggestion-item')) {
       input.value = e.target.textContent;
       suggestions.style.display = 'none';
+      // Lấy tọa độ
+      const coords = locationCoordinates[input.value];
+      if (coords) {
+        document.getElementById('latitudeInput').value = coords.lat;
+        document.getElementById('longitudeInput').value = coords.lng;
+      } else {
+        document.getElementById('latitudeInput').value = '';
+        document.getElementById('longitudeInput').value = '';
+      }
     }
   });
 

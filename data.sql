@@ -63,12 +63,10 @@ CREATE TABLE notifications (
 CREATE TABLE post_history (
     id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT,
-    editor_id INT,
+    editor_id INT NULL,
     old_title VARCHAR(255),
     old_content TEXT,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (editor_id) REFERENCES users(id) ON DELETE SET NULL
 );
-
-ALTER TABLE posts ADD COLUMN feeling VARCHAR(100) DEFAULT NULL;

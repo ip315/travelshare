@@ -221,6 +221,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 formData.append('image', imageInput.files[0]);
             }
 
+            formData.append('latitude', document.getElementById('latitudeInput').value);
+            formData.append('longitude', document.getElementById('longitudeInput').value);
+
             console.log("Dữ liệu gửi đi:", Object.fromEntries(formData.entries()));
             alert("Đang gửi bài đăng... (Kiểm tra console để xem dữ liệu FormData)");
 
