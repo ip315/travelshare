@@ -78,7 +78,26 @@ document.addEventListener("DOMContentLoaded", function () {
        }
        const data = await response.json();
        if (data.success) {
-         renderPosts(data.posts);
+         // Lọc theo user nếu có
+         const urlParams = new URLSearchParams(window.location.search);
+         const user = urlParams.get('user');
+         let posts = data.posts;
+         if (user) {
+           posts = posts.filter(post => post.username === user);
+         }
+         renderPosts(posts);
+         // Cuộn tới bài viết nếu có id
+         const postId = urlParams.get('id');
+         if (postId) {
+           setTimeout(function() {
+             const postElem = document.querySelector(`[data-post-id='${postId}']`);
+             if (postElem) {
+               postElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+               postElem.style.background = '#ffffcc';
+               setTimeout(() => postElem.style.background = '', 2000);
+             }
+           }, 500);
+         }
        } else {
          throw new Error(data.message || "Không thể lấy dữ liệu bài đăng.");
        }

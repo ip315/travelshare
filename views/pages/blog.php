@@ -5,7 +5,7 @@
 </button>
 <main class="main-content">
   <div class="container">
-    <h1>Blog du lịch</h1>
+    <h1>Blog du lịch.</h1>
     <div id="postsGrid" class="posts-grid"></div>
   </div>
 </main>
